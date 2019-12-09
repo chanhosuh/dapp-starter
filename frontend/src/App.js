@@ -2,10 +2,10 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
-import initWeb3 from "utils/web3";
-// import contractArtifact from "contracts/MyToken";
+import initWeb3 from "./utils/web3";
+import contractArtifact from "./contracts/TokenFactory";
 import { toWei, fromWei } from "web3-utils";
-import getContract from "utils/contract";
+import getContract from "./utils/contract";
 
 async function getAccounts(web3) {
   const accounts = await web3.eth.getAccounts();
