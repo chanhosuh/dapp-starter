@@ -20,7 +20,7 @@
 
 const HDWalletProvider = require("truffle-hdwallet-provider");
 const utils = require("web3-utils");
-require("dotenv").config();
+require("dotenv").config(); // load env variables from .env file
 const path = require("path");
 
 const INFURA_KEY_RINKEBY = process.env.INFURA_KEY_RINKEBY;
@@ -63,14 +63,14 @@ module.exports = {
      * host: (default: none)
      * port: (default: none)
      * network_id: (default: none)
-     * gas: Gas limit used for deploys. Default is 6721975
-     * gasPrice: Gas price used for deploys. Default is 100000000000 (100 Shannon).
-     * from: From address used during migrations. Defaults to accounts[0].
+     * gas: gas limit used for deploys. Default is 6721975
+     * gasPrice: gas price used for deploys. Default is 100000000000 (100 Shannon).
+     * from: address used during migrations. Defaults to accounts[0].
      * provider - web3 provider instance Truffle should use to talk to the Ethereum network.
      *          - function that returns a web3 provider instance (see below.)
      *          - if specified, host and port are ignored.
-     * websockets: true        // Enable EventEmitter interface for web3 (default: false)
-     * confirmations: # of confs to wait between deployments. (default: 0)
+     * websockets: enable EventEmitter interface for web3 (default: false)
+     * confirmations: number of confirmations to wait between deployments. (default: 0)
      * timeoutBlocks: - if a transaction is not mined, keep waiting for this number of blocks (default is 50)
      * skipDryRun: - true if you don't want to test run the migration locally before the actual migration (default is false)
      */
@@ -103,7 +103,6 @@ module.exports = {
     //   skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
     // },
     rinkeby: {
-      // Provided by Infura, load keys in .env file
       network_id: "4",
       provider: getRinkebyProvider,
       gas: 4600000,
