@@ -1,5 +1,5 @@
 {
-  "name": "dapp-starter",
+  "name": "ubi-token",
   "version": "1.0.0",
   "description": "",
   "main": "truffle-config.js",
@@ -9,7 +9,9 @@
   "scripts": {
     "test": "mocha",
     "lint": "npx solium -d contracts --fix",
-    "coverage": "npx solidity-coverage"
+    "coverage": "npx solidity-coverage",
+    "ganache": "./ganache/ganache_start.sh",
+    "generate_keys": "./ganache/generate_keys.sh"
   },
   "author": "",
   "license": "ISC",
