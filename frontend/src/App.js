@@ -3,8 +3,8 @@ import logo from "./logo.svg";
 import "./App.css";
 
 import initWeb3 from "./utils/web3";
-import contractArtifact from "./contracts/TokenFactory";
-import { toWei, fromWei } from "web3-utils";
+import contractArtifact from "./contracts/SampleContract";
+import { toWei, fromWei, toBN } from "web3-utils";
 import getContract from "./utils/contract";
 
 async function getAccounts(web3) {
@@ -15,31 +15,55 @@ async function getAccounts(web3) {
 }
 
 class App extends React.Component {
+  state = {
+    accounts: [],
+    contract: null
+  };
+
   async componentDidMount() {
-    this.init();
+    this.web3 = await initWeb3();
+
+    if (this.web3) {
+      // initialize DApp with accounts and contracts info
+      this.init();
+
+      // add listeners for account and network changes
+      const web3Provider = this.web3.currentProvider;
+      web3Provider.on("accountsChanged", async accounts => {
+        console.log("Account(s) updated.");
+        console.log("accounts[0]: ", accounts[0]);
+        this.init();
+      });
+
+      web3Provider.on("networkChanged", async netId => {
+        console.log("Network changed.");
+        console.log("Net ID: ", netId);
+        this.init();
+      });
+    }
   }
 
   init = async () => {
-    this.web3 = await initWeb3();
-
     try {
       // check network and retrieve deployed contract
-      this.contract = await getContract(contractArtifact, this.web3);
+      const contract = await getContract(contractArtifact, this.web3);
+      console.debug("Contract(s) initialized.");
 
       // set the initial accounts
-      this.accounts = await getAccounts(this.web3);
+      const accounts = await getAccounts(this.web3);
+      console.debug("Account(s) retrieved.");
+
+      this.setState({ accounts, contract });
+
+      // set up listeners for app interactions.
+
+      // trigger various things that need to happen upon app being opened.
 
       console.log("Dapp initialised");
     } catch (err) {
       console.error("Failed to init Dapp");
       console.error(err);
     }
-
-    // set up listeners for app interactions.
-    // TODO
-
-    // trigger various things that need to happen upon app being opened.
-    // TODO
   };
 
   render() {

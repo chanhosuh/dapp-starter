@@ -13,6 +13,10 @@ const initWeb3 = async () => {
     } catch (err) {
       console.error("User denied account access.");
     }
+
+    // soon to be deprecated / removed, as reloading is bad
+    // see https://medium.com/metamask/no-longer-reloading-pages-on-network-change-fbf041942b44
+    window.ethereum.autoRefreshOnNetworkChange = false;
   } else if (window.web3) {
     // legacy-style
     web3 = new Web3(window.web3.currentProvider);

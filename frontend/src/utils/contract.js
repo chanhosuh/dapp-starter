@@ -14,7 +14,7 @@ async function getContract(contractArtifact, web3) {
     networkId = Object.keys(contractArtifact.networks)[0];
     deployedNetwork = contractArtifact.networks[networkId];
   }
-  console.log("deployedNetwork", deployedNetwork);
+  console.debug("deployedNetwork", deployedNetwork);
 
   // initialise the contract
   let contract;
